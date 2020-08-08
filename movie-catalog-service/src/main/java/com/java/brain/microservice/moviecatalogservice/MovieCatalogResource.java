@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,8 @@ public class MovieCatalogResource {
 	RestTemplate restTemplate;
 
 	@Autowired
+	private DiscoveryClient discoveryClint;
+	@Autowired
 	WebClient.Builder webClientBuilder;
 
 	@RequestMapping("/{userId}")
@@ -37,7 +40,7 @@ public class MovieCatalogResource {
 		// put them all together
 		//List<Rating> ratings = Arrays.asList(new Rating("123342", 2), new Rating("54453", 3), new Rating("34343", 4),new Rating("4324343", 5));
 
-		UserRating userRatings = restTemplate.getForObject("http://localhost:8083/ratingdata/user/"+userId,UserRating.class);
+		UserRating userRatings = restTemplate.getForObject("http://rating-data-service/ratingdata/user/"+userId,UserRating.class);
 //		return ratings.stream().map(rating ->{
 //			Movie movie=restTemplate.getForObject("http://localhost:8082/movie/"+movie.getMovieId(), Movie.class);			
 //		,new CatalogItem(movie.getN,"Transformer des",4))mov;
@@ -48,7 +51,7 @@ public class MovieCatalogResource {
 			// movie.getMovieId(), Movie.class);
 			
 			// For each movieId call movie info service and get details
-			Movie mov = webClientBuilder.build().get().uri("http://localhost:8082/movie/" + rat.getMovieId()).retrieve()
+			Movie mov = webClientBuilder.build().get().uri("http://movie-info-service/movie/" + rat.getMovieId()).retrieve()
 					.bodyToMono(Movie.class).block();
 
 			return new CatalogItem(mov.getMovieName(), "Des", rat.getRating());
