@@ -1,0 +1,19 @@
+#my.greeting:Hello world
+app:
+ name:My Application name
+ description:Welcome to ${app.name}
+
+my:
+ list
+  values:one,two,three
+	
+dbvalues:"{connectionString:"http://localhost:3243",username:"foo",password:"123456"}"
+
+
+db:
+ connection:"{connectionString:"http://localhost:3243",username:"foo",password:"123456"}"
+ host:127.0.0.1
+ port:1200
+
+
+management.endpoints.web.exposure.include:"*"
