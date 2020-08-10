@@ -42,8 +42,8 @@ public class GreetingController {
 	@GetMapping("/envdetails")
 	public String enDetails() {
 		
-		return env.getProperty("propertySources");
-		//return env.toString();
+		//return env.getProperty("propertySources");
+		return env.toString();
 	}
 
 }
