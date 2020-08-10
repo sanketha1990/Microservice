@@ -1,0 +1,7 @@
+--- |-
+  my.greeting:Hello world
+  #my.list.values:{"one',"two","three"}
+  #my.db.values:connectionString-3243-foo
+  db.connection:connectionString-3243-test db.host:127.0.0.1 db.port:1400
+  
+  management.endpoints.web.exposure.include:"*"

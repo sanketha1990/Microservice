@@ -1,19 +1,7 @@
-#my.greeting:Hello world
-app:
- name:My Application name
- description:Welcome to ${app.name}
-
-my:
- list
-  values:one,two,three
-	
-dbvalues:"{connectionString:"http://localhost:3243",username:"foo",password:"123456"}"
-
-
-db:
- connection:"{connectionString:"http://localhost:3243",username:"foo",password:"123456"}"
- host:127.0.0.1
- port:1200
-
-
-management.endpoints.web.exposure.include:"*"
+--- |-
+  my.greeting:Hello world
+  #my.list.values:{"one',"two","three"}
+  my.db.values:connectionString-3243-foo
+  db.connection:connectionString-3243-default db.host:127.0.0.1 db.port:1200
+  
+  management.endpoints.web.exposure.include:"*" spring.profile.active=test
